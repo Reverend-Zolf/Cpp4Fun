@@ -1,0 +1,80 @@
+  Stack / Heap Memory
+- At a basic level, both just store data
+The main differences are: 
+    Size of available memory (Heap Wins)
+    The way memory is found/allocated
+    Speed of memory allocation (Stack Wins in general)
+    Stack memory deallocated when leaves scope
+
+
+Example Allocations
+
+int main(){
+    int var = 7; //stack
+    int* hvar = new int; //heap
+    *hvar = 5 ;
+   // delete hvar;
+}
+
+
+
+Stack Memory
+
+- Stack known as 'static memory'
+- All stack memory allocation sizes need to be known at compile time
+- Memory allocation which depends on runtime variables (dynamic memory size) must be heap allocated
+
+Heap Memory
+
+- Much more space available
+- Alloc via the 'new'  (Type * varName = new Type; )
+- Calls C malloc under the hood
+- OS find a contigous chunk of memoryand ruturns a pointer to it
+
+Stack = fast, limited
+Heap = slow, large
+
+Pointers
+
+- A poiter stores a memory address
+- Modifying the pointer variable modifies the address it points to
+- To modify the value of the data in memory that it points to, we dereference
+
+deference is modify the house
+
+C++ / RAII
+
+* Resource Acquisition is Initialization
+- BInds the life cycle of a resource that must be acquired before use to the life time of an object
+- Makes life easier by implementing things in a way that automatically manages memory/resources within an object
+- Encapsulate each resource into a class
+
+class IntArray {
+  
+  int * array;
+
+public:
+  IntArray(size_t size) { array = new int[size];} //constructor
+  ĨntArray() { delete [] array; } //destructor
+  int & operator [] (size_t i) { return array [i];}
+}
+
+#include "IntArray.h"
+
+int main()
+{
+  IntArray arr(10); //mem allocated
+  arr[5] = 21;
+
+} // arr destructs, mem deadllocated
+
+Well Garbs
+
+C++ Smart Pointers
+
+- Can be cumbersome to create our owwn RAII Classes for every data Type we want to store a pointer to
+- C++ contains different smart Pointers
+- using std::shared_ptr<T> 
+- If pointer out of scope, aut deletion, there is internal counter
+
+ 
